@@ -1,0 +1,36 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  background-color: #080f1b;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 7rem;
+  font-size: 1.2rem;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+}
+
+.navbar-main {
+  margin-top: 0.5rem;
+  margin-left: 10rem;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}
+
+.navbar-profile {
+  margin-top: 0.5rem;
+  margin-right: 3rem;
+  color: #72a3ff;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+.navbar-logout {
+  cursor: pointer;
+}

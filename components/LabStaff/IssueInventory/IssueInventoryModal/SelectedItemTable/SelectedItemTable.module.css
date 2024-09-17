@@ -1,0 +1,25 @@
+.main-table {
+  width: 100%;
+}
+
+.main-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.main-table thead tr td {
+  background-color: #061d49;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 1rem;
+}
+
+.main-table tbody tr td {
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  font-weight: 400;
+}
+.main-table table td + td {
+  border-left: 2px solid #e0e0e0;
+}

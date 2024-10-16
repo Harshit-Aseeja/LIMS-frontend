@@ -2,6 +2,7 @@ import Link from "next/link";
 import styles from "./Lab.module.css";
 
 const Lab = (props) => {
+  console.log("Labs: " + props.lab);
   const { labName, location, lab_id, name, email, mobile } = props.lab;
   return (
     <div className={styles.main}>

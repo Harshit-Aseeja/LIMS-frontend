@@ -67,15 +67,15 @@
   /* justify-content: space-between; */
 }
 
-.main-footer-button {
-  width: 107%;
+.main-footer button {
   background-color: #3e74de;
   border-radius: 0.5rem;
   border: none;
   color: #fff;
-  padding: 0.9rem 1rem;
+  padding: 0.9rem 3.8rem;
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
   transition: 0.3s ease-in-out;
+  width: 75%;
 }

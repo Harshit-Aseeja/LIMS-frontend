@@ -3,7 +3,7 @@ import Backdrop from "../Backdrop/Backdrop";
 import { useState } from "react";
 import AddLabModal from "../AddLabmodal";
 const AddLab = () => {
-    const [showCreateLab, setShowCreateLab] = useState(false);
+  const [showCreateLab, setShowCreateLab] = useState(false);
   const handleAddLab = () => {
     setShowCreateLab((prevState) => !prevState);
   };
@@ -14,9 +14,7 @@ const AddLab = () => {
     <>
       {showCreateLab && (
         <Backdrop hideBackdrop={hideBackdrop}>
-          <AddLabModal
-            hideBackdrop={hideBackdrop}
-          ></AddLabModal>
+          <AddLabModal hideBackdrop={hideBackdrop}></AddLabModal>
         </Backdrop>
       )}
       <div onClick={handleAddLab} className={styles.main}>

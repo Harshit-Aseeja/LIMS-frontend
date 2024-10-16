@@ -14,7 +14,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className={styles["navbar-profile"]}>
-        <div>Guest</div>
+        <div>Guest!!</div>
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ const AddInventoryModal = (props) => {
   const specifications = useInput({ initialValue: "" });
   const router = useRouter();
   const { data, post, error, loading, put } = useHttp();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const inventory_data = {
@@ -20,7 +21,7 @@ const AddInventoryModal = (props) => {
       model: model.value,
       total_qty: total_quantity.value,
       maker: maker.value,
-      specifications: JSON.parse(specifications.value),
+      specifications: specifications.value,
       lab_id: lab_id,
       //could've parsed to json but let's see if this works
     };

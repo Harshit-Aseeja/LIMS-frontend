@@ -1,8 +1,8 @@
 import Link from "next/link";
 import styles from "./Lab.module.css";
 
-const Lab = (props) => {
-  const { labName, location, lab_id, name, email, mobile } = props.lab;
+const Component = (props) => {
+  const { labName, location, lab_id, name, email, mobile } = props.inventory;
   console.log(labName, location, lab_id, name, email, mobile);
   return (
     <div className={styles.main}>
@@ -40,4 +40,4 @@ const Lab = (props) => {
   );
 };
 
-export default Lab;
+export default Component;

@@ -12,6 +12,7 @@ const AddLabModal = (props) => {
   const router = useRouter();
   const authCtx = useContext(AuthContext);
   const { data, post, error, loading } = useHttp();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (

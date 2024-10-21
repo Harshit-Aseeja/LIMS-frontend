@@ -4,6 +4,7 @@ import styles from "./LabStaffLab.module.css";
 import LabStaffLabTable from "../LabStaffLabTable/LabStaffLabTable";
 import { useContext } from "react";
 import AuthContext from "store/authContext";
+import AddInventory from "../AddInventory/AddInventory";
 const LabStaffLab = ({ inventory, incharge }) => {
   const authCtx = useContext(AuthContext);
 
@@ -47,6 +48,7 @@ const LabStaffLab = ({ inventory, incharge }) => {
           </div>
         </div>
         <LabStaffLabTable inventories={inventory}></LabStaffLabTable>
+        <AddInventory />
       </div>
     </div>
   );

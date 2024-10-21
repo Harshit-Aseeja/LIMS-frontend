@@ -1,6 +1,6 @@
 import Lab from "components/Lab/Lab";
 import styles from "./Labs.module.css";
-import AddLab from "components/AddLab";
+import AddLab from "components/AddLab/index.js";
 const Labs = (props) => {
   // props.data is an array of objects with lab details
   console.log("fetching labs");

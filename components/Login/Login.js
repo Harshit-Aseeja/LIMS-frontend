@@ -11,7 +11,7 @@ const Login = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [type, setType] = useState("hod");
+  const [type, setType] = useState("student");
   const url = process.env.NEXT_PUBLIC_BACKEND_URL + `/${type}/login`;
   const { data, loading, error, post } = useHttp();
   // useEffect(() => {
@@ -113,10 +113,22 @@ const Login = () => {
                   >
                     <input
                       type="radio"
+                      id="student"
+                      name="type"
+                      value="student"
+                      defaultChecked
+                      onClick={() => setType("student")}
+                    />
+                    <label htmlFor="student">Student</label>
+                  </div>
+                  <div
+                    className={styles["main-right-content-form-group2-group"]}
+                  >
+                    <input
+                      type="radio"
                       id="hod"
                       name="type"
                       value="hod"
-                      defaultChecked
                       onClick={() => setType("hod")}
                     />
                     <label htmlFor="hod">HOD</label>

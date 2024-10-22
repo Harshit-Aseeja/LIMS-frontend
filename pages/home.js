@@ -6,6 +6,7 @@ import styles from "./styles/home.module.css";
 import AuthContext from "store/authContext";
 import Error from "components/ErrorPage/Error";
 import GuestHome from "components/Guest/GuestHome/GuestHome";
+import StudentHome from "components/Student/StudentHome/StudentHome";
 const Home = () => {
   const router = useRouter();
   const authCtx = useContext(AuthContext);
@@ -13,6 +14,8 @@ const Home = () => {
     <div className={styles["main"]}>
       {authCtx.type === "hod" ? (
         <HODHome />
+      ) : authCtx.type === "student" ? (
+        <StudentHome />
       ) : authCtx.type === "labstaff" ? (
         <LabStaffHome />
       ) : authCtx.type === "guest" ? (

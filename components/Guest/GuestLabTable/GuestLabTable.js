@@ -1,5 +1,6 @@
 import styles from "./GuestLabTable.module.css";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
+
 const HODLabTable = ({ inventories }) => {
   if (!inventories || inventories.length === 0)
     return <div>No inventories</div>;

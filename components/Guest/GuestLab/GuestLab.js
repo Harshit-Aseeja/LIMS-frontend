@@ -1,6 +1,6 @@
 import styles from "./GuestLab.module.css";
 import GuestLabTable from "../GuestLabTable/GuestLabTable";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../Navbar/GuestNavbar";
 const HODLab = ({ inventory, incharge }) => {
   return (
     <div className={styles["main"]}>

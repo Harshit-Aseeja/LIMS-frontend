@@ -40,7 +40,6 @@ const Login = () => {
 
   useEffect(() => {
     if (data) {
-      alert(data.message);
       if (data.status === 200) {
         authCtx.login(data.token, type, data.data);
       }
@@ -121,6 +120,32 @@ const Login = () => {
                     />
                     <label htmlFor="student">Student</label>
                   </div>
+                  {/* <div
+                    className={styles["main-right-content-form-group2-group"]}
+                  >
+                    <input
+                      type="radio"
+                      id="faculty"
+                      name="type"
+                      value="faculty"
+                      defaultChecked
+                      onClick={() => setType("faculty")}
+                    />
+                    <label htmlFor="faculty">Faculty</label>
+                  </div>
+                  <div
+                    className={styles["main-right-content-form-group2-group"]}
+                  >
+                    <input
+                      type="radio"
+                      id="admin"
+                      name="type"
+                      value="admin"
+                      defaultChecked
+                      onClick={() => setType("admin")}
+                    />
+                    <label htmlFor="admin">Admin</label>
+                  </div> */}
                   <div
                     className={styles["main-right-content-form-group2-group"]}
                   >

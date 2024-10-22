@@ -3,7 +3,7 @@ import { useEffect, useContext } from "react";
 import useHttp from "../../../hooks/use-http";
 import Department from "./Department";
 import AuthContext from "../../../store/authContext";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../Navbar/GuestNavbar";
 
 const Departments = (props) => {
   const url = process.env.NEXT_PUBLIC_BACKEND_URL + "/api/departments";

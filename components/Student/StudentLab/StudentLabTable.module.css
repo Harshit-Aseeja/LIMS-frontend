@@ -1,0 +1,139 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid #3e74de;
+  overflow: hidden;
+  width: 103%;
+}
+
+.main-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  gap: 2.5rem;
+}
+
+.main-header-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #3e74de;
+}
+
+.main-header-search {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.main-header-select {
+  border: 2px solid #a8a8a8;
+  border-radius: 5px;
+  padding: 7px 10px 7px 10px;
+  color: black;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.main-header-select:focus {
+  outline: none;
+}
+
+.main-header-search-bar {
+  display: flex;
+  flex-direction: row;
+  border: 2px solid #a8a8a8;
+  border-radius: 5px;
+  padding: 0.3rem 0.3rem 0.3rem 0.3rem;
+}
+
+.main-header-search-bar input {
+  border: none;
+  color: #7b7b7b;
+  font-weight: 500;
+  min-width: 20rem;
+}
+.main-header-search-bar input:focus {
+  border: none;
+  outline: none;
+}
+
+.main-header-search-button {
+  background: #3e74de;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  padding: 0.7rem 3rem 0.7rem 3rem;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.main-header-download-button {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #046c57;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  gap: 0.3rem;
+}
+
+.main-header-download-button img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.main-table {
+  width: 100%;
+}
+
+.main-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.main-table thead tr td {
+  background-color: #061d49;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 1rem;
+}
+
+.main-table tbody tr td {
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  font-weight: 400;
+}
+
+.main-table tbody tr:nth-child(even) {
+  background-color: #edf4ff;
+}
+
+.main-table tbody tr:last-child {
+  border-radius: 10px;
+}
+
+.main-table-column-specification {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.main-table-column-specification ol {
+  list-style-type: decimal;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-left: 0.7rem;
+}

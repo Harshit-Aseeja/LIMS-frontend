@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styles from "./GuestHome.module.css";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../Navbar/GuestNavbar";
 import Departments from "./Departments";
 
 function GuestHome() {

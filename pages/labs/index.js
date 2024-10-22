@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import useHttp from "hooks/use-http";
 import Labs from "components/Labs/Labs";
 import styles from "./index.module.css";
-import Navbar from "../../components/Guest/Navbar/Navbar";
+import AuthContext from "store/authContext";
+import Navbar from "components/Navbar/Navbar";
+import GuestNavbar from "components/Guest/Navbar/GuestNavbar";
 function index(props) {
+  const authCtx = useContext(AuthContext);
   const router = useRouter();
   const id = router.query.id;
   const { data, loading, error, get } = useHttp();
@@ -27,7 +30,8 @@ function index(props) {
   // return <Labs data={data && data.labs} />;
   return (
     <div className={styles["main"]}>
-      <Navbar></Navbar>
+      {authCtx.type === "student" && <Navbar />}
+      {authCtx.type === "guest" && <GuestNavbar />}
       <div className={styles["main-content"]}>
         <div className={styles["main-content-heading"]}>
           {/* Department: {authCtx.details.dept} */}

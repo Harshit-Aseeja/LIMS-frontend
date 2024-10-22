@@ -1,10 +1,10 @@
+import styles from "./StudentLab.module.css";
 import Navbar from "components/Navbar/Navbar";
-import styles from "./HODLab.module.css";
-import HODLabTable from "../HODLabTable/HODLabTable";
+import StudentLabTable from "./StudentLabTable";
 import { useContext } from "react";
 import AuthContext from "store/authContext";
-const HODLab = ({ inventory, incharge }) => {
-  console.log("HOD lab is called!");
+const StudentLab = ({ inventory, incharge }) => {
+  //console.log("Student Lab is called!");
   const authCtx = useContext(AuthContext);
   return (
     <div className={styles["main"]}>
@@ -45,10 +45,10 @@ const HODLab = ({ inventory, incharge }) => {
             </div>
           </div>
         </div>
-        <HODLabTable inventories={inventory}></HODLabTable>
+        <StudentLabTable inventories={inventory}></StudentLabTable>
       </div>
     </div>
   );
 };
 
-export default HODLab;
+export default StudentLab;

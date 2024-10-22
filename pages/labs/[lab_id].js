@@ -5,13 +5,17 @@ import AuthContext from "store/authContext";
 import Error from "components/ErrorPage/Error";
 import GuestLab from "components/Guest/GuestLab/GuestLab";
 import LabStaffLab from "components/LabStaff/LabStaffLab/LabStaffLab";
+import StudentLab from "components/Student/StudentLab/StudentLab";
 
 const Lab = (props) => {
   const authCtx = useContext(AuthContext);
+  console.log(authCtx.type);
 
   return authCtx.type === "hod" ? (
     <HODLab inventory={props.inventory} incharge={props.incharge} />
-  ) : authCtx.type === "guest" || authCtx.type === "student" ? (
+  ) : authCtx.type === "student" ? (
+    <StudentLab inventory={props.inventory} incharge={props.incharge} />
+  ) : authCtx.type === "guest" ? (
     <GuestLab inventory={props.inventory} incharge={props.incharge} />
   ) : authCtx.type === "labstaff" ? (
     <LabStaffLab inventory={props.inventory} incharge={props.incharge} />

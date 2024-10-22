@@ -3,7 +3,7 @@ import AuthContext from "store/authContext";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import Link from "next/link";
-const Navbar = () => {
+const GuestNavbar = () => {
   const router = useRouter();
   const authCtx = useContext(AuthContext);
   return (
@@ -20,4 +20,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default GuestNavbar;

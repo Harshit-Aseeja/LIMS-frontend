@@ -19,6 +19,7 @@ function index(props) {
 
   useEffect(() => {
     if (data) {
+      console.log(data);
       if (data.status !== 200) alert(error);
     }
   }, [data]);

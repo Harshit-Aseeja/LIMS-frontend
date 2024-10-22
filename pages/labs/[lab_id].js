@@ -11,7 +11,7 @@ const Lab = (props) => {
 
   return authCtx.type === "hod" ? (
     <HODLab inventory={props.inventory} incharge={props.incharge} />
-  ) : authCtx.type === "guest" ? (
+  ) : authCtx.type === "guest" || authCtx.type === "student" ? (
     <GuestLab inventory={props.inventory} incharge={props.incharge} />
   ) : authCtx.type === "labstaff" ? (
     <LabStaffLab inventory={props.inventory} incharge={props.incharge} />

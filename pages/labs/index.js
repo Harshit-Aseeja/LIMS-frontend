@@ -11,6 +11,7 @@ function index(props) {
   const router = useRouter();
   const id = router.query.id;
   const { data, loading, error, get } = useHttp();
+  //console.log(data.labs);
   useEffect(() => {
     const makeRequest = async () => {
       await get({

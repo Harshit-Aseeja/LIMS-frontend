@@ -1,22 +1,22 @@
+/* ViewCart.module.css */
+
 .main {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-top: 20px;
+  background-color: #0070f3; /* Primary button color */
+  color: white; /* Button text color */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px 15px; /* Add some padding */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 16px; /* Font size */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
 
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.main:hover {
+  background-color: #005bb5; /* Darker shade on hover */
 }
 
-button:hover {
-  background-color: #0056b3;
+.main img {
+  margin-right: 8px; /* Space between the icon and text */
 }

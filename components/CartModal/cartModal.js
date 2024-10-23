@@ -58,7 +58,7 @@ const CartModal = (props) => {
         <img src="/images/close.svg" alt="close"></img>
       </div>
       <div className={styles.title}>
-        <h1>Cart</h1>
+        <h1>Cart Summary</h1>
       </div>
       <div className={styles.cartItems}>
         {cart.length === 0 ? (
@@ -73,7 +73,7 @@ const CartModal = (props) => {
         )}
       </div>
       <button onClick={handleIssue} className={styles["btn-issue"]}>
-        Issue Items
+        Submit Request
       </button>
     </div>
   );

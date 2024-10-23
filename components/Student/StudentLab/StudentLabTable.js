@@ -2,7 +2,7 @@ import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import styles from "./StudentLabTable.module.css";
 import CartButton from "components/CartButton/CartButton";
 import { CartProvider } from "hooks/cartContext";
-import viewCart from "components/viewCart/viewCart";
+import ViewCart from "components/viewCart/viewCart";
 
 const StudentLabTable = ({ inventories }) => {
   if (!inventories || inventories.length === 0)
@@ -31,7 +31,7 @@ const StudentLabTable = ({ inventories }) => {
             </button>
           </div>
           <div className={styles["main-header-download"]}>
-            <viewCart />
+            <ViewCart />
           </div>
         </div>
         <div className={styles["main-table"]}>
@@ -69,6 +69,7 @@ const StudentLabTable = ({ inventories }) => {
                       <CartButton
                         inventoryId={index + 1}
                         maxQuantity={inventory.total_qty - inventory.issued_qty}
+                        itemName={inventory.name}
                       />
                     </td>
                   </tr>

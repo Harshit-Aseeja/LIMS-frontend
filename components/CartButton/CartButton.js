@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./CartButton.module.css";
 import { useCart } from "hooks/cartContext";
 
-const CartButton = ({ inventoryId, maxQuantity }) => {
+const CartButton = ({ inventoryId, maxQuantity, itemName }) => {
   const [quantity, setQuantity] = useState(0);
   const { addToCart, updateQuantity, removeFromCart, cart } = useCart();
 
@@ -18,7 +18,7 @@ const CartButton = ({ inventoryId, maxQuantity }) => {
 
   const handleAddToCart = () => {
     setQuantity(1);
-    addToCart(inventoryId, 1);
+    addToCart(inventoryId, 1, itemName);
   };
 
   const handleIncrement = () => {

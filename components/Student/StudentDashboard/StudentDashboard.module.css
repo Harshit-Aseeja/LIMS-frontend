@@ -1,0 +1,55 @@
+.dashboard {
+  padding: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.table th {
+  background-color: #f2f2f2;
+}
+
+.table th {
+  text-align: left;
+}
+
+.table td ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.table td ul li {
+  margin: 5px 0;
+}
+
+.table button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 5px;
+}
+
+.table button:hover {
+  background-color: #45a049;
+}
+
+.table button:last-child {
+  background-color: #f44336;
+}
+
+.table button:last-child:hover {
+  background-color: #e53935;
+}

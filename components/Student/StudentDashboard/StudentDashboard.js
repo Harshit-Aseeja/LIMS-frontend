@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import useHttp from "hooks/use-http";
 import AuthContext from "store/authContext";
+import Navbar from "components/Navbar/Navbar";
 import styles from "./StudentDashboard.module.css";
 
 const StudentDashboard = () => {
@@ -11,7 +12,7 @@ const StudentDashboard = () => {
   useEffect(() => {
     const fetchIssues = async () => {
       await get({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/issues/student/${authCtx.details.roll_number}`,
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/issues/student/${authCtx.details?.roll_number}`,
         headers: {
           authorization: authCtx.token,
         },
@@ -22,7 +23,7 @@ const StudentDashboard = () => {
 
   useEffect(() => {
     if (data) {
-      setIssues(data.issues);
+      setIssues(data.issues || []); // Default to an empty array if data.issues is undefined or null
     }
     if (error) {
       alert(error);
@@ -39,48 +40,61 @@ const StudentDashboard = () => {
     alert(`Delete issue with ID: ${issueId}`);
   };
 
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Intl.DateTimeFormat("en-US", options).format(
+      new Date(dateString)
+    );
+  };
+
   return (
-    <div className={styles.dashboard}>
-      <h1>Student Dashboard</h1>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>Issue ID</th>
-            <th>Request Date</th>
-            <th>Items</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {issues.length === 0 ? (
+    <div className={styles.main}>
+      <Navbar />
+      <div className={styles["main-content"]}>
+        <div className={styles["main-content-heading"]}>Student Dashboard</div>
+        {loading && <p>Loading...</p>}
+        <table className={styles.table}>
+          <thead>
             <tr>
-              <td colSpan="5">No issues found</td>
+              <th>Issue ID</th>
+              <th>Request Date</th>
+              <th>Items</th>
+              <th>Status</th>
+              <th>Actions</th>
             </tr>
-          ) : (
-            issues.map((issue) => (
-              <tr key={issue.id}>
-                <td>{issue.id}</td>
-                <td>{issue.request_date}</td>
-                <td>
-                  <ul>
-                    {issue.items.map((item, index) => (
-                      <li key={index}>
-                        {item.inventoryId}: {item.quantity}
-                      </li>
-                    ))}
-                  </ul>
-                </td>
-                <td>{issue.status}</td>
-                <td>
-                  <button onClick={() => handleEdit(issue.id)}>Edit</button>
-                  <button onClick={() => handleDelete(issue.id)}>Delete</button>
-                </td>
+          </thead>
+          <tbody>
+            {issues.length === 0 ? (
+              <tr>
+                <td colSpan="5">No issues found</td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            ) : (
+              issues.map((issue) => (
+                <tr key={issue.id}>
+                  <td>{issue.id}</td>
+                  <td>{formatDate(issue.request_date)}</td>
+                  <td>
+                    <ul>
+                      {issue.items.map((item, index) => (
+                        <li key={index}>
+                          {item.inventory_name}: {item.quantity}
+                        </li>
+                      ))}
+                    </ul>
+                  </td>
+                  <td>{issue.status}</td>
+                  <td>
+                    <button onClick={() => handleEdit(issue.id)}>Edit</button>
+                    <button onClick={() => handleDelete(issue.id)}>
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

@@ -10,7 +10,9 @@ const StudentLab = ({ inventory, incharge }) => {
     <div className={styles["main"]}>
       {authCtx && authCtx.details && authCtx.details.name && <Navbar />}
       <div className={styles["main-content"]}>
-        <div className={styles["main-content-heading"]}>{incharge.labName}</div>
+        <div className={styles["main-content-heading"]}>
+          {incharge?.labName}
+        </div>
         <div className={styles["main-content-details"]}>
           <div className={styles["main-content-details-group"]}>
             <div className={styles["main-content-details-group-label"]}>

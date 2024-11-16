@@ -50,7 +50,6 @@ const LabStaffLab = ({ inventory, incharge }) => {
           </div>
         </div>
         <LabStaffLabTable inventories={inventory}></LabStaffLabTable>
-        <AddInventory />
       </div>
     </div>
   );

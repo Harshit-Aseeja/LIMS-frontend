@@ -1,9 +1,8 @@
 .main {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
-  width: 230%;
+  width: 600px;
   min-height: 40%;
   background-color: white;
   z-index: 200;
@@ -38,6 +37,21 @@
   color: #3e74de;
 }
 
+.btn-add-excel {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.input-file {
+  display: none;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -54,14 +68,14 @@
 }
 
 .form-group label {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 500;
   width: 40%;
   padding-top: 2.8%;
 }
 
 .form-group input {
-  width: 100%;
+  width: 80%;
   border: 1px solid #a8a8a8;
   border-radius: 5px;
   padding: 0.7rem;
@@ -69,7 +83,7 @@
 }
 
 .btn-create-department {
-  width: 70%;
+  width: 50%;
   border: none;
   border-radius: 5px;
   background-color: #3e74de;

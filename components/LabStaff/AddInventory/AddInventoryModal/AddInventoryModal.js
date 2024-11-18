@@ -59,12 +59,24 @@ const AddInventoryModal = (props) => {
       const json = XLSX.utils.sheet_to_json(worksheet);
 
       json.forEach(async (row) => {
+        // Parsing the specifications and converting them into a JSON object
+        const specifications = row["Specifications"];
+        let specificationsJson = {};
+
+        if (specifications) {
+          const specsArray = specifications.split(","); // Assuming each specification is separated by a comma
+          specificationsJson = specsArray.reduce((acc, spec, index) => {
+            acc[index + 1] = spec.trim(); // Create JSON key-value pairs where keys are 1, 2, 3, etc.
+            return acc;
+          }, {});
+        }
+
         const inventory_data = {
           name: row["Instrument Name"],
           model: row["Model Number"],
           total_qty: row["Total Quantity"],
           maker: row["Maker"],
-          specifications: row["Specifications"],
+          specifications: specificationsJson, // Store specifications as a JSON object
           lab_id: lab_id,
         };
 

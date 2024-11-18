@@ -62,26 +62,50 @@ const LabStaffDashboard = () => {
     }
   };
 
-  const handleApprove = (issueId) => {
-    updateIssueStatus(issueId, "ongoing");
-  };
+  const handleMarkAsCompleted = async (issueId) => {
+    try {
+      const issueResponse = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/issues/${issueId}`,
+        {
+          headers: {
+            authorization: authCtx.token,
+          },
+        }
+      );
 
-  const handleDecline = (issueId) => {
-    updateIssueStatus(issueId, "rejected");
-  };
+      if (!issueResponse.ok) {
+        throw new Error("Failed to fetch issue details");
+      }
 
-  const handleEdit = (issueId) => {
-    // Implement the edit functionality
-    alert(`Edit issue with ID: ${issueId}`);
-  };
+      const issueData = await issueResponse.json();
 
-  const handleDelete = (issueId) => {
-    // Implement the delete functionality
-    alert(`Delete issue with ID: ${issueId}`);
-  };
+      // Update issue status to 'completed'
+      await updateIssueStatus(issueId, "completed");
 
-  const handleMarkAsCompleted = (issueId) => {
-    updateIssueStatus(issueId, "completed");
+      // Update issued quantities in the inventory
+      const updateIssuedQuantities = issueData.items.map((item) =>
+        fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/inventory/${item.inventory_id}/updateIssuedQuantity`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              authorization: authCtx.token,
+            },
+            body: JSON.stringify({
+              issued_qty: item.quantity,
+            }),
+          }
+        )
+      );
+
+      await Promise.all(updateIssuedQuantities);
+
+      alert("Issue marked as completed and inventory updated successfully!");
+    } catch (error) {
+      console.error("Error marking issue as completed:", error);
+      alert("Error marking issue as completed");
+    }
   };
 
   const formatDate = (dateString) => {

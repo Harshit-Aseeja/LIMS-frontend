@@ -39,12 +39,6 @@ const StudentLabTable = ({ inventories }) => {
           </div>
           <div className={styles["main-header-download"]}>
             <ViewCart />
-            <button
-              onClick={handleExport}
-              className={styles["main-header-download-button"]}
-            >
-              Download Excel
-            </button>
           </div>
         </div>
         <div className={styles["main-table"]}>

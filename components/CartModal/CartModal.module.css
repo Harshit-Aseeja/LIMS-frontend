@@ -81,3 +81,29 @@
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
+/* Date fields container for better alignment */
+.date-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Add spacing between start and end date inputs */
+  margin: 20px 0; /* Space above and below the date container */
+}
+
+.date {
+  flex: 1; /* Ensure equal width for both inputs */
+}
+
+.date label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.date input {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

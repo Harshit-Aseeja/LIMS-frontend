@@ -7,6 +7,7 @@ import AuthContext from "store/authContext";
 import Error from "components/ErrorPage/Error";
 import GuestHome from "components/Guest/GuestHome/GuestHome";
 import StudentHome from "components/Student/StudentHome/StudentHome";
+import AdminHome from "components/Admin/AdminHome/AdminHome";
 const Home = () => {
   const router = useRouter();
   const authCtx = useContext(AuthContext);
@@ -20,6 +21,8 @@ const Home = () => {
         <LabStaffHome />
       ) : authCtx.type === "guest" ? (
         <GuestHome />
+      ) : authCtx.type === "admin" ? (
+        <AdminHome />
       ) : (
         <Error />
       )}

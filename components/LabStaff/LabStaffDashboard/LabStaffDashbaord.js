@@ -62,6 +62,62 @@ const LabStaffDashboard = () => {
     }
   };
 
+  const handleApprove = async (issueId) => {
+    try {
+      await updateIssueStatus(issueId, "ongoing");
+      alert("Issue approved and status updated to ongoing.");
+    } catch (error) {
+      console.error("Error approving issue:", error);
+      alert("Error approving issue");
+    }
+  };
+
+  const handleDecline = async (issueId) => {
+    try {
+      const issueResponse = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/issues/${issueId}`,
+        {
+          headers: {
+            authorization: authCtx.token,
+          },
+        }
+      );
+
+      if (!issueResponse.ok) {
+        throw new Error("Failed to fetch issue details");
+      }
+
+      const issueData = await issueResponse.json();
+
+      // Update issue status to 'rejected'
+      await updateIssueStatus(issueId, "rejected");
+
+      // Reduce issued quantities in the inventory
+      const updateIssuedQuantities = issueData.items.map((item) =>
+        fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/inventory/${item.inventory_id}/updateIssuedQuantity`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              authorization: authCtx.token,
+            },
+            body: JSON.stringify({
+              issued_qty: -item.quantity,
+            }),
+          }
+        )
+      );
+
+      await Promise.all(updateIssuedQuantities);
+
+      alert("Issue declined and inventory updated successfully!");
+    } catch (error) {
+      console.error("Error declining issue:", error);
+      alert("Error declining issue");
+    }
+  };
+
   const handleMarkAsCompleted = async (issueId) => {
     try {
       const issueResponse = await fetch(
@@ -126,9 +182,10 @@ const LabStaffDashboard = () => {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>Issue ID</th>
-              <th>Request Date</th>
+              <th>Student ID</th>
+              <th>Duration</th>
               <th>Items</th>
+              <th>Reason</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -136,13 +193,17 @@ const LabStaffDashboard = () => {
           <tbody>
             {issues.length === 0 ? (
               <tr>
-                <td colSpan="5">No issues found for your lab</td>
+                <td colSpan="6">No issues found for your lab</td>
               </tr>
             ) : (
               issues.map((issue) => (
                 <tr key={issue.id}>
-                  <td>{issue.id}</td>
-                  <td>{formatDate(issue.request_date)}</td>
+                  <td>{issue.student_id}</td>
+                  <td>
+                    {formatDate(issue.start_date) +
+                      "\nto\n" +
+                      formatDate(issue.end_date)}
+                  </td>
                   <td>
                     <ul>
                       {issue.items.map((item, index) => (
@@ -152,6 +213,7 @@ const LabStaffDashboard = () => {
                       ))}
                     </ul>
                   </td>
+                  <td>{issue.reason || "N/A"}</td>
                   <td>{issue.status}</td>
                   <td>
                     {issue.status === "pending" && (

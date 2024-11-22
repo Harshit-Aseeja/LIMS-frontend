@@ -1,0 +1,25 @@
+.main {
+  width: 100%;
+  height: 100%;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  width: 100%;
+  height: max-content;
+  /* height: 100%; */
+}
+
+.main-content-heading {
+  margin-top: 2rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #3e74de;
+  margin-bottom: 2rem;
+}

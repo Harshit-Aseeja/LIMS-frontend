@@ -14,12 +14,7 @@ const Login = () => {
   const [type, setType] = useState("student");
   const url = process.env.NEXT_PUBLIC_BACKEND_URL + `/${type}/login`;
   const { data, loading, error, post } = useHttp();
-  // useEffect(() => {
-  //   console.log(authCtx.isLoggedIn);
-  //   if (authCtx.isLoggedIn) {
-  //     router.replace("/");
-  //   }
-  // }, []);
+
   // send the login request to the backend
   const processLogin = async () => {
     await post({
@@ -46,9 +41,10 @@ const Login = () => {
     }
   }, [data]);
 
-  const loginAsGuestHandler = () => {
-    authCtx.login("", "guest", "");
-    router.push("/");
+  const loginAsGuestHandler = (event) => {
+    event.preventDefault(); // Prevent the default form submission
+    authCtx.login("", "guest", ""); // Set the context for a guest user
+    router.push("/home"); // Navigate to the home page
   };
 
   const page = (
@@ -120,32 +116,6 @@ const Login = () => {
                     />
                     <label htmlFor="student">Student</label>
                   </div>
-                  {/* <div
-                    className={styles["main-right-content-form-group2-group"]}
-                  >
-                    <input
-                      type="radio"
-                      id="faculty"
-                      name="type"
-                      value="faculty"
-                      defaultChecked
-                      onClick={() => setType("faculty")}
-                    />
-                    <label htmlFor="faculty">Faculty</label>
-                  </div>
-                  <div
-                    className={styles["main-right-content-form-group2-group"]}
-                  >
-                    <input
-                      type="radio"
-                      id="admin"
-                      name="type"
-                      value="admin"
-                      defaultChecked
-                      onClick={() => setType("admin")}
-                    />
-                    <label htmlFor="admin">Admin</label>
-                  </div> */}
                   <div
                     className={styles["main-right-content-form-group2-group"]}
                   >
@@ -170,6 +140,18 @@ const Login = () => {
                     />
                     <label htmlFor="labstaff">Lab Staff</label>
                   </div>
+                  {/* <div
+                    className={styles["main-right-content-form-group2-group"]}
+                  >
+                    <input
+                      type="radio"
+                      id="admin"
+                      name="type"
+                      value="admin"
+                      onClick={() => setType("admin")}
+                    />
+                    <label htmlFor="admin">Admin</label>
+                  </div> */}
                 </div>
                 <button
                   onClick={onSubmitHandler}
@@ -177,11 +159,8 @@ const Login = () => {
                 >
                   Sign In
                 </button>
-              </form>
-              <div>
-                <div className={styles["div-span-or"]}>
-                  <span>or</span>
-                </div>
+
+                <div className={styles["div-span-or"]}>or</div>
 
                 <button
                   className={styles["main-right-content-btn-guest"]}
@@ -189,7 +168,7 @@ const Login = () => {
                 >
                   Continue as Guest
                 </button>
-              </div>
+              </form>
             </div>
           </div>
         </div>

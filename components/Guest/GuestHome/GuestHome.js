@@ -4,6 +4,7 @@ import Navbar from "../Navbar/GuestNavbar";
 import Departments from "./Departments";
 
 function GuestHome() {
+  console.log("Guest home loaded");
   return (
     <div className={styles["main"]}>
       <Navbar />

@@ -58,6 +58,7 @@
   font-weight: 500;
   min-width: 20rem;
 }
+
 .main-header-search-bar input:focus {
   border: none;
   outline: none;
@@ -71,6 +72,13 @@
   padding: 0.7rem 3rem 0.7rem 3rem;
   font-weight: 600;
   font-size: 1rem;
+}
+
+.main-header-download {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3rem;
 }
 
 .main-header-download-button {

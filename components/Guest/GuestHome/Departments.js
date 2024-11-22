@@ -3,9 +3,9 @@ import { useEffect, useContext } from "react";
 import useHttp from "../../../hooks/use-http";
 import Department from "./Department";
 import AuthContext from "../../../store/authContext";
-import Navbar from "../Navbar/GuestNavbar";
 
 const Departments = (props) => {
+  console.log("departments loaded");
   const url = process.env.NEXT_PUBLIC_BACKEND_URL + "/api/departments";
   const authCtx = useContext(AuthContext);
   const { data, loading, error, get } = useHttp();

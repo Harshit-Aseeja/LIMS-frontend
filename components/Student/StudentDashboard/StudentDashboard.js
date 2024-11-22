@@ -6,7 +6,7 @@ import styles from "./StudentDashboard.module.css";
 
 const StudentDashboard = () => {
   const [issues, setIssues] = useState([]);
-  const { data, get, error, loading } = useHttp();
+  const { data, get, del, error, loading } = useHttp();
   const authCtx = useContext(AuthContext);
 
   useEffect(() => {
@@ -30,14 +30,56 @@ const StudentDashboard = () => {
     }
   }, [data, error]);
 
-  const handleEdit = (issueId) => {
-    // Implement the edit functionality
-    alert(`Edit issue with ID: ${issueId}`);
-  };
+  const handleDelete = async (issueId) => {
+    if (window.confirm("Are you sure you want to delete this issue?")) {
+      try {
+        // Find the issue that needs to be deleted
+        const issue = issues.find((item) => item.id === issueId);
 
-  const handleDelete = (issueId) => {
-    // Implement the delete functionality
-    alert(`Delete issue with ID: ${issueId}`);
+        if (!issue) {
+          alert("Issue not found.");
+          return;
+        }
+
+        // Step 1: Prepare the payload to reduce issued quantities for the items
+        const updateIssuedQuantities = issue.items.map((item) =>
+          fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/inventory/${item.inventory_id}/updateIssuedQuantity`, // Replace with the correct endpoint
+            {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+                authorization: authCtx.token,
+              },
+              body: JSON.stringify({
+                issued_qty: -item.quantity, // Decrease issued_qty by the quantity in the deleted issue
+              }),
+            }
+          )
+        );
+
+        // Wait for all the quantity update requests to complete
+        await Promise.all(updateIssuedQuantities);
+
+        // Step 2: Delete the issue after reducing the issued quantities
+        await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/issues/delete/${issueId}`,
+          {
+            method: "DELETE",
+            headers: {
+              authorization: authCtx.token,
+            },
+          }
+        );
+
+        // Step 3: Update local state to remove the deleted issue from the UI
+        setIssues(issues.filter((issue) => issue.issue_id !== issueId));
+
+        alert("Issue deleted successfully.");
+      } catch (error) {
+        alert("Error deleting issue: " + error.message);
+      }
+    }
   };
 
   const formatDate = (dateString) => {
@@ -71,7 +113,7 @@ const StudentDashboard = () => {
             ) : (
               issues.map((issue) => (
                 <tr key={issue.id}>
-                  <td>{issue.id}</td>
+                  <td>{issue.issue_id}</td>
                   <td>{formatDate(issue.request_date)}</td>
                   <td>
                     <ul>
@@ -84,8 +126,11 @@ const StudentDashboard = () => {
                   </td>
                   <td>{issue.status}</td>
                   <td>
-                    <button onClick={() => handleEdit(issue.id)}>Edit</button>
-                    <button onClick={() => handleDelete(issue.id)}>
+                    <button
+                      className={styles.deleteButton}
+                      onClick={() => handleDelete(issue.id)}
+                      disabled={issue.status !== "pending"} // Disable button if status is not "pending"
+                    >
                       Delete
                     </button>
                   </td>

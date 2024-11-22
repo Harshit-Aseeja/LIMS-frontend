@@ -3,10 +3,10 @@
 .main {
   display: flex;
   align-items: center;
-  background-color: #0070f3; /* Primary button color */
+  background-color: #3e74de; /* Primary button color */
   color: white; /* Button text color */
   border: none; /* Remove default border */
-  border-radius: 4px; /* Rounded corners */
+  border-radius: 8px; /* Rounded corners */
   padding: 10px 15px; /* Add some padding */
   cursor: pointer; /* Pointer cursor on hover */
   font-size: 16px; /* Font size */
@@ -14,7 +14,7 @@
 }
 
 .main:hover {
-  background-color: #005bb5; /* Darker shade on hover */
+  background-color: #3e74de; /* Darker shade on hover */
 }
 
 .main img {

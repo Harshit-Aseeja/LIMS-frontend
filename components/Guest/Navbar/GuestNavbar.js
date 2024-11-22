@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useContext } from "react";
 import Link from "next/link";
 const GuestNavbar = () => {
+  console.log("Navbar loaded");
   const router = useRouter();
   const authCtx = useContext(AuthContext);
   return (

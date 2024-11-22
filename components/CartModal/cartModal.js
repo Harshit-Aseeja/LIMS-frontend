@@ -9,7 +9,7 @@ const CartModal = (props) => {
   const { cart, clearCart } = useContext(CartContext);
   const router = useRouter();
   const authCtx = useContext(AuthContext);
-  const { data, post, error, loading } = useHttp();
+  const { data, post, error } = useHttp();
 
   const [reason, setReason] = useState("");
   const [startDate, setStartDate] = useState(""); // Store start date
@@ -17,29 +17,53 @@ const CartModal = (props) => {
 
   // Extract labId from the URL
   const { query } = router;
-  console.log(query);
   const labId = query.lab_id;
 
   const handleIssue = (event) => {
     event.preventDefault();
 
-    if (cart.length === 0) {
-      alert("Your cart is empty");
+    // Validate inputs
+    if (!reason.trim()) {
+      alert("Reason for the request cannot be empty.");
       return;
     }
 
-    console.log(authCtx.details);
+    if (!startDate) {
+      alert("Start date cannot be empty.");
+      return;
+    }
+
+    if (!endDate) {
+      alert("End date cannot be empty.");
+      return;
+    }
+
+    // Validate dates
+    const today = new Date().toISOString().split("T")[0]; // Current date in YYYY-MM-DD format
+    if (startDate < today) {
+      alert("Start date cannot be before the current date.");
+      return;
+    }
+
+    if (endDate < startDate) {
+      alert("End date cannot be before the start date.");
+      return;
+    }
+
+    if (cart.length === 0) {
+      alert("Your cart is empty.");
+      return;
+    }
 
     const dept_name = authCtx.details?.dept;
-    const studentId = authCtx.details?.roll_number; // Get student roll number
-
-    const currentDate = new Date().toISOString().split("T")[0]; // Get current date in YYYY-MM-DD format
-    console.log("lab id: " + labId + " student id: " + studentId);
+    const studentId = authCtx.details?.roll_number;
 
     if (!labId || !studentId) {
       alert("Lab ID and student roll number are required to issue items.");
       return;
     }
+
+    const currentDate = new Date().toISOString().split("T")[0];
 
     const cartData = cart.map((item) => ({
       inventoryId: item.inventoryId,
@@ -49,7 +73,7 @@ const CartModal = (props) => {
 
     const makeRequest = async () => {
       await post({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/issues/create`, // Updated URL for the single issues table
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/issues/create`,
         headers: {
           authorization: authCtx.token,
         },
@@ -58,9 +82,10 @@ const CartModal = (props) => {
           lab_id: labId,
           start_date: startDate,
           end_date: endDate,
-          request_date: currentDate, // Sending the current date as the request_date field
+          request_date: currentDate,
           items: cartData,
-          status: "pending", // Default status for new issue
+          status: "pending",
+          reason: reason,
         },
       });
     };
@@ -72,7 +97,8 @@ const CartModal = (props) => {
       alert(data.message);
       props.hideBackdrop();
       clearCart();
-      router.reload();
+      // Stay on the current lab page
+      router.replace(`/labs/${labId}`);
     }
     if (error) alert(error);
   }, [data, error]);
@@ -110,26 +136,26 @@ const CartModal = (props) => {
         />
       </div>
 
-      {/* Start Date Input */}
-      <div className={styles.date}>
-        <label htmlFor="start-date">Start Date:</label>
-        <input
-          type="date"
-          id="start-date"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-        />
-      </div>
-
-      {/* End Date Input */}
-      <div className={styles.date}>
-        <label htmlFor="end-date">End Date:</label>
-        <input
-          type="date"
-          id="end-date"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
-        />
+      {/* Start and End Date Inputs */}
+      <div className={styles["date-container"]}>
+        <div className={styles.date}>
+          <label htmlFor="start-date">Start Date:</label>
+          <input
+            type="date"
+            id="start-date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+        </div>
+        <div className={styles.date}>
+          <label htmlFor="end-date">End Date:</label>
+          <input
+            type="date"
+            id="end-date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+        </div>
       </div>
 
       <button onClick={handleIssue} className={styles["btn-issue"]}>
